@@ -38,6 +38,7 @@ class ParticipantController extends Controller
         // $this->authorize('create', Participant::class);
 
         $validated = $request->validated();
+        $validated['image'] = str_replace("public/images", "images", $request->file('image')->store('public/images'));
 
         $participant = Participant::create($validated);
 
@@ -87,4 +88,21 @@ class ParticipantController extends Controller
 
         return response()->noContent();
     }
+
+    public function registerAsChurch(Request $request){
+
+        $validated = $request->validated();
+        $number_of_participants = $validated['number_of_participants'];
+    
+        $participants = [];
+    
+        // Loop to create participants
+        for ($i = 0; $i < $number_of_participants; $i++) {
+            $participant = Participant::create($validated);
+            $participants[] = new ParticipantResource($participant);
+        }
+    
+        return $participants;
+    }
+    
 }

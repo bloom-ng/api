@@ -20,9 +20,10 @@ use App\Http\Controllers\Api\ParticipantController;
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
-// Route::apiResource('/youthweek/participants', ParticipantController::class);
+//Participants
 Route::get('/youthweek/participants', [ParticipantController::class, "index"]);
 Route::post('/youthweek/participants', [ParticipantController::class, "store"]);
+Route::post('/youthweek/church-participants', [ParticipantController::class, "registerAsChurch"]);
 Route::post('/youthweek/participants/{participant}', [ParticipantController::class, "update"]);
 Route::post('/youthweek/participants/{participant}', [ParticipantController::class, "destroy"]);
 
@@ -32,6 +33,7 @@ Route::post('/youthweek/churches', [ChurchController::class, "store"]);
 Route::post('/youthweek/churches/{church}', [ChurchController::class, "update"]);
 Route::post('/youthweek/churches/{church}', [ChurchController::class, "destroy"]);
 
+// Route::apiResource('/youthweek/participants', ParticipantController::class);
 // Route::apiResource('/youthweek/churches', ChurchController::class);
 
 Route::middleware('auth:sanctum')

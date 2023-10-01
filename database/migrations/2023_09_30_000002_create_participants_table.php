@@ -15,12 +15,13 @@ return new class extends Migration {
         Schema::create('participants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('church_id')->default(0);
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->unsignedInteger('type')->nullable();
             $table->integer('group')->nullable();
-            $table->enum('gender', ['male', 'female', 'other']);
+            $table->longText('image');
+            $table->enum('gender', ['male', 'female', 'other'])->nullable();
 
             $table->timestamps();
         });
