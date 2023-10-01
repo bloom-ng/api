@@ -31,6 +31,7 @@ class ParticipantUpdateRequest extends FormRequest
             'type' => ['nullable', 'max:255'],
             'group' => ['nullable', 'numeric'],
             'gender' => ['required', 'in:male,female,other'],
+            'image' => ['nullable', 'max:5000', 'file'],
         ];
     }
 }

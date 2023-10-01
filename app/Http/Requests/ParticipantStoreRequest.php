@@ -31,7 +31,7 @@ class ParticipantStoreRequest extends FormRequest
             'type' => ['nullable', 'max:255'],
             'group' => ['nullable', 'numeric'],
             'gender' => ['nullable', 'in:male,female,other'],
-            'image' => ['nullable', 'max:500', 'file'],
+            'image' => ['nullable', 'max:5000', 'file'],
         ];
     }
 }
