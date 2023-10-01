@@ -24,7 +24,7 @@ class ChurchController extends Controller
 
         $churches = Church::search($search)
             ->latest()
-            ->paginate();
+            ->paginate(50);
 
         return new ChurchCollection($churches);
     }
