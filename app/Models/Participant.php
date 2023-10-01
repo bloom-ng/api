@@ -19,6 +19,7 @@ class Participant extends Model
         'type',
         'group',
         'gender',
+        'image',
     ];
 
     protected $searchableFields = ['*'];
