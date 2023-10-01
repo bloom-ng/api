@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('phone')->nullable();
             $table->unsignedInteger('type')->nullable();
             $table->integer('group')->nullable();
-            $table->longText('image');
+            $table->longText('image')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
 
             $table->timestamps();

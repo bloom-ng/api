@@ -38,7 +38,7 @@ class ParticipantController extends Controller
         // $this->authorize('create', Participant::class);
 
         $validated = $request->validated();
-        $validated['image'] = str_replace("public/images", "images", $request->file('image')->store('public/images'));
+        $validated['image'] = $request->image->store('images');
 
         $participant = Participant::create($validated);
 
