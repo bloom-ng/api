@@ -18,6 +18,7 @@ class ParticipantPolicy
      */
     public function viewAny(User $user)
     {
+    
         return true;
     }
 
@@ -28,9 +29,9 @@ class ParticipantPolicy
      * @param  App\Models\Participant  $model
      * @return mixed
      */
-    public function view(User $user, Participant $model)
+    public function view()
     {
-        return true;
+        return false;
     }
 
     /**

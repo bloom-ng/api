@@ -18,13 +18,14 @@ class ParticipantController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view-any', Participant::class);
+        //dump(auth('sanctum')->user());
+        //$this->authorize('view');
 
         $search = $request->get('search', '');
 
         $participants = Participant::search($search)
             ->latest()
-            ->paginate();
+            ->paginate(50);
 
         return new ParticipantCollection($participants);
     }
@@ -52,7 +53,7 @@ class ParticipantController extends Controller
      */
     public function show(Request $request, Participant $participant)
     {
-        $this->authorize('view', $participant);
+        // $this->authorize('view', $participant);
 
         return new ParticipantResource($participant);
     }
@@ -66,7 +67,7 @@ class ParticipantController extends Controller
         ParticipantUpdateRequest $request,
         Participant $participant
     ) {
-        $this->authorize('update', $participant);
+        // $this->authorize('update', $participant);
 
         $validated = $request->validated();
 
@@ -82,7 +83,7 @@ class ParticipantController extends Controller
      */
     public function destroy(Request $request, Participant $participant)
     {
-        $this->authorize('delete', $participant);
+        // $this->authorize('delete', $participant);
 
         $participant->delete();
 

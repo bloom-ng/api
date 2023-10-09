@@ -63,7 +63,7 @@ class ChurchController extends Controller
      */
     public function update(ChurchUpdateRequest $request, Church $church)
     {
-        $this->authorize('update', $church);
+        // $this->authorize('update', $church);
 
         $validated = $request->validated();
 
@@ -79,7 +79,7 @@ class ChurchController extends Controller
      */
     public function destroy(Request $request, Church $church)
     {
-        $this->authorize('delete', $church);
+        // $this->authorize('delete', $church);
 
         $church->delete();
 
