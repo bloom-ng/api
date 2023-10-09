@@ -37,10 +37,16 @@ class ParticipantController extends Controller
     public function store(ParticipantStoreRequest $request)
     {
         // $this->authorize('create', Participant::class);
-
+        //get last
+        $participant = Participant::latest()->first();
+        //dump($participant);
+        $next = empty($participant) ? Participant::getNext(null) : Participant::getNext($participant->group);
+        //get next group
         $validated = $request->validated();
         $validated['image'] = $request->image->store('images');
-
+        if($validated['type'] == 0){
+            $validated['group'] = $next;
+        }
         $participant = Participant::create($validated);
 
         return new ParticipantResource($participant);

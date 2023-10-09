@@ -23,4 +23,20 @@ class Participant extends Model
     ];
 
     protected $searchableFields = ['*'];
+
+    public static function getNext($last) {
+        switch ($last) {
+            case 1:
+                # code...
+                return 2;
+            case 2:
+                return 3;
+            case 3:
+                return 1;
+            default:
+                # code...
+                return 1;
+                break;
+        }
+    }
 }
