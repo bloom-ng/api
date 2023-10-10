@@ -43,7 +43,7 @@ Route::name('api.')
         Route::apiResource('users', UserController::class);
         
         // Route::apiResource('participants', ParticipantController::class);
-        Route::get('/youthweek/participants', [ParticipantController::class, "index"]);
+        Route::get('/youthweek/participants/{type?}/{group?}', [ParticipantController::class, "index"]);
         Route::post('/youthweek/participants/{participant}', [ParticipantController::class, "update"]);
         Route::post('/youthweek/participants/{participant}', [ParticipantController::class, "destroy"]);
         

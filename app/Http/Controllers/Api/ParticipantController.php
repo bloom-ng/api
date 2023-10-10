@@ -16,16 +16,26 @@ class ParticipantController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $type = null, $group = null)
     {
-        //dump(auth('sanctum')->user());
-        //$this->authorize('view');
-
         $search = $request->get('search', '');
 
-        $participants = Participant::search($search)
-            ->latest()
-            ->paginate(50);
+        $query = Participant::search($search)
+            ->latest();
+
+        // Check if the 'type' parameter is provided and filter by type if it is
+        if ($type !== null) {
+            $typeValues = explode(',', $type); // You can pass type values as a comma-separated list
+            $query->whereIn('type', $typeValues);
+        }
+
+        // Check if the 'group' parameter is provided and filter by group if it is
+        if ($group !== null) {
+            $groupValues = explode(',', $group); // You can pass group values as a comma-separated list
+            $query->whereIn('group', $groupValues);
+        }
+
+        $participants = $query->paginate(50);
 
         return new ParticipantCollection($participants);
     }
