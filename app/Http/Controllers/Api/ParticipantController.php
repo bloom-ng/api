@@ -47,7 +47,7 @@ class ParticipantController extends Controller
     public function store(ParticipantStoreRequest $request)
     {
         // Check if a participant with the same request number and email exists
-        $existingParticipant = Participant::where('request_number', $request->input('request_number'))
+        $existingParticipant = Participant::where('phone', $request->input('phone'))
             ->where('email', $request->input('email'))
             ->first();
 
