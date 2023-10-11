@@ -46,21 +46,39 @@ class ParticipantController extends Controller
      */
     public function store(ParticipantStoreRequest $request)
     {
+        // Check if a participant with the same request number and email exists
+        $existingParticipant = Participant::where('request_number', $request->input('request_number'))
+            ->where('email', $request->input('email'))
+            ->first();
+
+        if ($existingParticipant) {
+            // If an existing participant is found, return its data
+            return new ParticipantResource($existingParticipant);
+        }
+
+        // No existing participant found, continue to create a new participant
         // $this->authorize('create', Participant::class);
-        //get last
+
+        // Get the last participant
         $participant = Participant::latest()->first();
-        //dump($participant);
+
+        // Get the next group
         $next = empty($participant) ? Participant::getNext(null) : Participant::getNext($participant->group);
-        //get next group
+
+        // Get the validated data from the request
         $validated = $request->validated();
         $validated['image'] = $request->image->store('images');
-        if($validated['type'] == 0){
+
+        if ($validated['type'] == 0) {
             $validated['group'] = $next;
         }
+
+        // Create a new participant
         $participant = Participant::create($validated);
 
         return new ParticipantResource($participant);
     }
+
 
     /**
      * @param \Illuminate\Http\Request $request
