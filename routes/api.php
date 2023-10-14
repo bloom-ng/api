@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ChurchController;
 use App\Http\Controllers\Api\ParticipantController;
+use App\Models\Participant;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ Route::name('api.')
     ->group(function () {
         Route::apiResource('users', UserController::class);
         
+        Route::get('/youthweek/participants/info', [ParticipantController::class, "getInfo"]);
+
         // Route::apiResource('participants', ParticipantController::class);
         Route::get('/youthweek/participants/{type?}/{group?}', [ParticipantController::class, "index"]);
         Route::post('/youthweek/participants/{participant}', [ParticipantController::class, "update"]);

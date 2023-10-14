@@ -139,5 +139,27 @@ class ParticipantController extends Controller
     
         return $participants;
     }
+
+    public function getInfo()
+    {
+        $participant = Participant::all();
+        $host = $participant->where('type', 0)->count();
+        $guest = $participant->where('type', 1)->count();
+        $abidoye = $participant->where('group', 1)->count();
+        $ogundele = $participant->where('group', 2)->count();
+        $odudare = $participant->where('group', 3)->count();
+
+        $response = [
+            "error" => false,
+            "data" => [
+                "host" => $host,
+                "guest" => $guest,
+                "abidoye" => $abidoye,
+                "ogundele" => $ogundele,
+                "odudare" => $odudare,
+            ]
+        ];
+        return response()->json($response);
+    }
     
 }
